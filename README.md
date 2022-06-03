@@ -44,22 +44,26 @@ Nous savons que la cible s’est hébergée à l’hôtel « Black Rain » et qu
 
 > **_Question :_** Quel filtre avez-vous utilisé
 > 
-> **_Réponse :_** 
+> **_Réponse :_** `wlan.fc.type_subtype == 4`
+ 
 
 ---
 > **_Question :_** Quel est l’adresse MAC de la cible ?
 > 
-> **_Réponse :_** 
+> **_Réponse :_** `fc:f1:36:22:49:74`
+
 
 ---
 > **_Question :_** Quel est le nom du constructeur de l’interface sans fils de la cible ?
 > 
-> **_Réponse :_** 
+> **_Réponse :_** Samsung
 
 ---
 > **_Question :_** Quel autres endroits la cible a-t-elle probablement visités ?
 > 
-> **_Réponse :_** 
+> **_Réponse :_** La Migros, l'aéroport de Genève et la boulangerie Fleur de Pains
+> 
+> ![](images/Q1_filter.png)
 
 ---
 
@@ -105,18 +109,19 @@ Maintenant que vous avez la clé WEP, configurez la dans Wireshark afin de déch
 
 > **_Question :_** Combien de temps avez-vous attendu pour obtenir la clé WEP ?
 > 
-> **_Réponse :_** 
+> **_Réponse :_** Pratiquement instantané
 
 ---
 > **_Montrer une capture d'écran de l'obtention de la clé WEP_**
 > 
-> **_Capture ici_** 
+> **_Capture ici_** ![](images/Q2_aircrack-ng.png)
 
 ---
 > **_Question :_** Arrivez-vous à récupérer les informations d’identification (credentials) de l’authentification basique http contenue dans la capture ?
 > 
-> **_Réponse :_** 
-
+> **_Réponse :_** Oui
+> 
+> ![](images/Q2_httpcreds.png)
 ---
 
 
@@ -143,7 +148,14 @@ Nous utiliserons Wireshark pour trouver l’authentification WPA contenue dans l
 > **_Fournir une capture d'écran des chiffres aléatoires_**
 > 
 > **_Capture ici_** 
-
+> 
+> Le nonce envoyé par l'AP:
+> 
+> ![](images/Q3_APNonce.png)
+> 
+> Le nonce retourné par le client:
+> 
+> ![](images/Q3_clientNonce.png)
 ---
 
 
@@ -164,12 +176,12 @@ aircrack-ng <nom-du-fichier-capture> -w <nom-du-dictionnaire>
 
 > **_Question :_** Combien de temps avez-vous attendu pour obtenir la passphrase WPA ?
 > 
-> **_Réponse :_** 
+> **_Réponse :_** Un peu plus d'une minute
 
 ---
 > **_Montrer une capture d'écran de l'obtention de la passphrase WPA_**
 > 
-> **_Capture ici_** 
+> **_Capture ici_** ![](images/Q4_aircrack-ng.png)
 
 ---
 > **_Question :_** Lors de la capture, la cible a fait un « ping » sur un serveur. Arrivez-vous à dire de quel serveur il s’agit ?
@@ -177,10 +189,11 @@ aircrack-ng <nom-du-fichier-capture> -w <nom-du-dictionnaire>
 > 
 > **_Réponse :_** 
 > 
-> Adresse IP du serveur : ?
+> Adresse IP du serveur : 31.13.64.35
 >
-> Nom de Domaine : ?
-
+> Nom de Domaine : facebook.com
+> 
+> ![](images/Q4_ping.png)
 
 
 ### Exercice déchiffrement WPA 2 :
@@ -191,11 +204,12 @@ Nous avons enlevé une seule trame (choisie stratégiquement) du fichier de capt
 
 > **_Question :_** Est-ce que vous arrivez à refaire l'exercice ? Pourquoi ou pourquoi pas ?
 > 
-> **_Réponse :_** 
+> **_Réponse :_** Non. Il manque un message du 4-way handshake. Nous n'avons donc pas toutes les informations nécessaires pour casser la clé.
+> ![](images/Q5_aircrack-ng-error.png)
 
 ---
 > **_Question :_** Sur la base de votre réponse précédente, arrivez-vous à déduire quelle trame a été effacée ?
 
 > 
-> **_Réponse :_** 
-> 
+> **_Réponse :_** Le deuxième message du 4-way handshake a été supprimé.
+> ![](images/Q5_missingMessage.png)

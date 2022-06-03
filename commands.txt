@@ -1,0 +1,8 @@
+show all probe requests `wlan.fc.type_subtype == 4`
+
+We found a packet that sent a probe to the "Starbucks" SSID. Added source MAC address to filter 
+`wlan.ta == fc:f1:36:22:49:74`
+ to find all probe requests from this source
+
+
+Final filter : `wlan.fc.type_subtype == 4 && wlan.ta == fc:f1:36:22:49:74`
